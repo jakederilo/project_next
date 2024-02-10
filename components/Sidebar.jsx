@@ -1,9 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { RxSketchLogo, RxDashboard, RxPerson } from 'react-icons/rx';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { FiSettings } from 'react-icons/fi';
+import { RxSketchLogo, RxDashboard, RxPerson,  } from 'react-icons/rx';
+import { FaUsers } from "react-icons/fa";
+import { MdLocalPostOffice } from "react-icons/md";
+import { FcTodoList } from "react-icons/fc";
+import { LiaCommentSolid } from "react-icons/lia";
 
 const Sidebar = ({ children }) => {
   return (
@@ -21,19 +23,24 @@ const Sidebar = ({ children }) => {
               <RxDashboard size={20} />
             </div>
           </Link>
-          <Link href='/customers'>
+          <Link href='/users'>
             <div className='bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block'>
-              <RxPerson size={20} />
+              <FaUsers size={20} />
             </div>
           </Link>
-          <Link href='/orders'>
+          <Link href='/post'>
             <div className='bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block'>
-              <HiOutlineShoppingBag size={20} />
+              <MdLocalPostOffice size={20} />
             </div>
           </Link>
-          <Link href='/'>
+          <Link href='/comments'>
             <div className='bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block'>
-              <FiSettings size={20} />
+              <LiaCommentSolid size={20} />
+            </div>
+          </Link>
+          <Link href='/todos'>
+            <div className='bg-gray-100 hover:bg-gray-200 cursor-pointer my-4 p-3 rounded-lg inline-block'>
+              <FcTodoList size={20} />
             </div>
           </Link>
         </div>
