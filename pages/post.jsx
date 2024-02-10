@@ -1,48 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { BsPersonFill, BsThreeDotsVertical } from 'react-icons/bs';
+import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
 
 const Post = () => {
-  const [post, setPosts] = useState([]);
+  const [isFollowed, setIsFollowed] = React.useState(false);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts/')
       .then(response => response.json())
       .then(postData => {
-        setUsers(postData);
+        setPosts(postData);
       })
       .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching posts:', error);
       });
   }, []);
 
   return (
-    <div className='bg-gray-100 min-h-screen'>
-      <div className='flex justify-between p-4'>
-        <h2>Post</h2>
-        <h2>Welcome Back, Jake</h2>
-      </div>
-      <div className='p-4'>
-        <div className='w-full m-auto p-4 border rounded-lg bg-white overflow-y-auto'>
-          <div className='my-3 p-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 items-center justify-between cursor-pointer'>
-            <span>Name</span>
-            <span className='sm:text-left text-right'>Email</span>
-            <span className='hidden md:grid'>Address</span>
-            <span className='hidden sm:grid'>City</span>
+    <div className='container-md'>
+      <div class="container-fluid">
+        <div className='bg-gray-100 min-h-screen'>
+          <div className='flex justify-between p-4'>
+            <h2>Post</h2>
+            <h2>Welcome Back, Jake</h2>
           </div>
-          <ul>
-            {post.map((post, index) => (
-              <li key={index} className='bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 items-center justify-between cursor-pointer'>
-                <div className='flex items-center'>
-                  <div className='bg-purple-100 p-3 rounded-lg'>
-                    <BsPersonFill className='text-purple-800' />
+          <div className='p-4'>
+            <Card className="max-w-[340px]">
+              <CardHeader className="justify-between">
+                <div className="flex gap-5">
+                  <Avatar isBordered radius="full" size="md" src="public/avatar.png" />
+                  <div className="flex flex-col gap-1 items-start justify-center">
+                    <h4 className="text-small font-semibold leading-none text-default-600">Zoey Lang</h4>
+                    <h5 className="text-small tracking-tight text-default-400">@zoeylang</h5>
                   </div>
-                  <p className='pl-4'>{post.title}</p>
                 </div>
-                <p className='text-gray-600 sm:text-left text-right'>{post.email}</p>
-                <p className='hidden md:flex'>{user.body}</p>
-              </li>
-            ))}
-          </ul>
+                <Button
+                  className={isFollowed ? "bg-transparent text-foreground border-default-200" : ""}
+                  color="primary"
+                  radius="full"
+                  size="sm"
+                  variant={isFollowed ? "bordered" : "solid"}
+                  onPress={() => setIsFollowed(!isFollowed)}
+                >
+                  {isFollowed ? "Unfollow" : "Follow"}
+                </Button>
+              </CardHeader>
+              <CardBody className="px-3 py-0 text-small text-default-400">
+                <p>
+                  Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
+                </p>
+                <span className="pt-2">
+                  #FrontendWithZoey
+                  <span className="py-2" aria-label="computer" role="img">
+                    💻
+                  </span>
+                </span>
+              </CardBody>
+              <CardFooter className="gap-3">
+                <div className="flex gap-1">
+                  <p className="font-semibold text-default-400 text-small">4</p>
+                  <p className=" text-default-400 text-small">Following</p>
+                </div>
+                <div className="flex gap-1">
+                  <p className="font-semibold text-default-400 text-small">97.1K</p>
+                  <p className="text-default-400 text-small">Followers</p>
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
